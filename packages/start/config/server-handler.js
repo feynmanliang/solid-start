@@ -135,8 +135,8 @@ async function handleServerFunction(h3Event) {
       });
     }
     if (typeof result === "string") return new Response(result);
-    setHeader(h3Event, "content-type", "text/javascript");
-    return serializeToStream(instance, result);
+    setHeader(h3Event, "content-type", "application/json");
+    return JSON.stringify(result ?? null);
   } catch (x) {
     if (x instanceof Response && x.status === 302) {
       return new Response(null, {
